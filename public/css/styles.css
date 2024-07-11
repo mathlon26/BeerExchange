@@ -1,0 +1,478 @@
+*, *:after, *:before {
+    box-sizing: border-box;
+  }
+
+.mainTitle {
+    font-size: 25px !important;
+    font-family: 'Lobster', cursive;
+}
+
+.amaranth-regular {
+    font-family: "Amaranth", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.amaranth-bold {
+    font-family: "Amaranth", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.amaranth-regular-italic {
+    font-family: "Amaranth", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.amaranth-bold-italic {
+    font-family: "Amaranth", sans-serif;
+    font-weight: 700;
+    font-style: italic;
+}
+
+body {
+    background-color: rgb(255, 255, 255);
+}
+
+.point-me:hover {
+    cursor: pointer;
+}
+
+/*welcome.blade*/
+#docs-card, #getstarted-card, #aboutus-card, #helpus-card, .bg-slate{
+    background-color: rgba(199, 199, 199, 0.445) ;
+}
+
+
+/*Cashier*/
+
+.drinks-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.drink-cashier-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+    width: 150px;
+    transition: transform 0.3s;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.drink-cashier-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.drink-info {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 5px;
+    background-color: #f3f4f6;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.quantity-control button {
+    background-color: #4a5568;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.quantity-control button:hover {
+    background-color: #2d3748;
+}
+
+.quantity-control input {
+    width: 40px;
+    text-align: center;
+    font-size: 16px;
+    color: #4a5568;
+    border: 1px solid #e2e8f0;
+    border-radius: 3px;
+}
+
+.checkout-button {
+    margin-top: 20px;
+    background-color: #3182ce;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.checkout-button:hover {
+    background-color: #2b6cb0;
+}
+
+/*table drinks*/
+
+.rounded-square {
+    border-radius: 12px;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+}
+
+.actions a {
+    margin-right: 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.actions .pump-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.actions .pump-btn:hover {
+    background-color: #45a049;
+}
+
+.actions .edit-btn {
+    background-color: #008CBA;
+    color: white;
+}
+
+.actions .edit-btn:hover {
+    background-color: #007bb5;
+}
+
+.actions .dump-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.actions .dump-btn:hover {
+    background-color: #da190b;
+}
+
+.view-chart-btn {
+    background-color: #ffc107;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.view-chart-btn:hover {
+    background-color: #e0a800;
+}
+
+.add-drink-btn {
+    margin-left: 15px;
+    padding: 8px;
+    color: white;
+    border-radius: 6px;
+    background-color: #008CBA;
+}
+
+.drinks-dashboard-link {
+    color: #0084ff;
+}
+
+
+/*dashboard, market create form*/
+.db-event-form-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 60%;
+    max-width: 800px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.db-event-column {
+    margin-bottom: 20px;
+}
+
+.db-event-column1 {
+    flex: 1 1 100%;
+    text-align: center;
+}
+
+.db-event-column2,
+.db-event-column3 {
+    flex: 1 1 45%;
+}
+
+.db-event-column4 {
+    flex: 1 1 100%;
+    text-align: center;
+}
+
+
+
+.db-event-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.db-event-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+#event_name {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+.db-event-button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.db-event-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.db-event-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+.db-event-title {
+    font-size: larger;
+    color: rgb(0, 0, 0);
+}
+
+.summary-box {
+    background-color: #f3f4f6;
+}
+.text-custom-blue {
+    color: #3b82f6;
+}
+.text-custom-red {
+    color: #ef4444;
+}
+.text-custom-green {
+    color: #10b981; 
+}
+.btn-custom-blue {
+    background-color: #3b82f6;
+}
+
+.btn-custom-blue:disabled {
+    background-color: #b1cfff;
+}
+
+.btn-custom-blue:disabled:hover {
+    background-color: #b1cfff;
+}
+
+.btn-custom-blue:hover {
+    background-color: #2b6cb0;
+}
+.bg-custom-green {
+    background-color: #10b981;
+}
+.bg-custom-green:hover {
+    background-color: #059669;
+}
+.bg-custom-red {
+    background-color: #ef4444;
+}
+.bg-custom-red:hover {
+    background-color: #dc2626;
+}
+
+#chartDashboard {
+    overflow-y: hidden;
+}
+
+#chartDashboardContainer {
+    width: 100%;
+    height: 600px;
+    margin: 0;
+    padding: 0;
+    overflow-y: hidden;
+}
+
+#allChartDashboardContainer{
+    min-height: calc(100vh / 3);
+    max-height: calc(100vh / 3);
+    overflow-y: hidden;
+}
+
+.graph-section {
+    width: 100%;
+}
+
+
+
+.chart-loader {
+    width : 48px;
+    height: 48px;
+    border: 3px solid #aaaaaa;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    animation: rotation 1s linear infinite;
+    &:after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50% , -50%);
+        width:  40px;
+        height:  40px;
+        border-radius: 50%;
+        border: 3px solid transparent;
+        border-bottom-color: #007BFF;
+    }
+}
+
+.code-display {
+    background-color: #ffffff;
+    padding: 12px;
+    border: 2px solid #3498db;
+    border-radius: 8px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    color: #333333;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.otp-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.otp-code {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.otp-part {
+    width: 30px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px; /* Center text vertically */
+    font-size: 18px;
+    margin: 0 5px;
+    border-radius: 10px;
+    background-color: #16a2ff;
+    font-weight: 900;
+    color: #ffffff; /* Text color */
+}
+
+.otp-lpart {
+    width: 40px;
+}
+
+.otp-dash {
+    color: #16a2ff;
+    font-size: 18px;
+    margin: 0 5px;
+}
+
+.copy-code-btn {
+    background-color: #16a2ff;
+    color: white;
+    padding: 15px 25px;
+    font-size: 24px;
+    font-weight: 900;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+
+
+/**/
+
+
+.otp-form {
+    width: 230px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+input[type="tel"] {
+
+    width: 35px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px; /* Center text vertically */
+    font-size: 18px;
+    margin: 0 5px;
+    border-radius: 10px;
+    background-color: #16a2ff;
+    font-weight: 900;
+    border: none;
+    color: #ffffff; /* Text color */
+}
+
+
+.opt-title {
+    font-size: 24px;
+    font-weight: 900;
+}
+
+
+.homelink {
+    color: #16a2ff;
+    text-decoration: underline;
+}
+
+.homelink:hover {
+    color: #16a2ff;
+    text-decoration: none;
+}
