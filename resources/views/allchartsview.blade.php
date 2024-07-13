@@ -2,7 +2,6 @@
     <div class="bg-white px-6 py-6">
         <!-- Parent container for the grid -->
         <div id="chartContainer" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <!-- JavaScript will populate this container -->
         </div>
         @if (count($drinks) > 6)
         <div class="flex justify-between text-white">
@@ -12,13 +11,17 @@
                     <button id="nextButton" onclick="nextButton()" class="mt-4 p-4 btn-custom-blue rounded">Next</button>
                 </div>
         </div>
+        @else
+        <div class="flex justify-between text-white">
+            <a id="singleChartModeLink" class="mr-2 mt-4 p-4 btn-custom-blue rounded disabled:opacity-50" href="">Back to single chart mode</a>
+        </div>
         @endif
     </div>
     
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            renderCharts(currentPage);
-        });
+        
+        
+        
 
         const drinks = @json($drinks);
         const chartContainer = document.getElementById('chartContainer');
@@ -56,8 +59,11 @@
             const endIndex = startIndex + itemsPerPage;
             const drinksToRender = drinks.slice(startIndex, endIndex);
 
-            document.getElementById('prevButton').disabled = startIndex === 0;
-            document.getElementById('nextButton').disabled = endIndex >= drinks.length;
+            if (drinks.length > 6) {
+                document.getElementById('prevButton').disabled = startIndex === 0;
+                document.getElementById('nextButton').disabled = endIndex >= drinks.length;
+            }
+            
 
             for (const drink of drinksToRender) {
                 const chartDiv = document.createElement('div');
@@ -202,6 +208,8 @@
         
         const singleChartModeLink = document.getElementById('singleChartModeLink');
         singleChartModeLink.href = singleChartModeUrl;
+
+        renderCharts(currentPage);
     </script>
 </x-charts>
 

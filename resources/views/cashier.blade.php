@@ -8,10 +8,12 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             @if (Auth::user()->marketOpen())
+                @if (count($drinks) > 0)
+
                 <form method="POST" action="{{ route('checkout') }}">
                     @csrf
                     <div class="drinks-container">
-                        @foreach (auth()->user()->markets()->get()[0]->drinks as $drink)
+                        @foreach ($drinks as $drink)
                             <div class="drink-cashier-container" data-drink-id="{{ $drink->id }}">
                                 <a href="#" class="cashier-drink-logo bg-gray-100 overflow-hidden shadow-sm sm:rounded-lg">
                                     <img class="drink-cashier-img" src="{{ asset($drink->logo) }}" alt="Logo">
@@ -28,8 +30,26 @@
                             </div>
                         @endforeach
                     </div>
-                    <button type="submit" class="checkout-button">Checkout</button>
+                    <div class="flex justify-center align-middle text-center">
+                        <button type="submit" class="checkout-button">Checkout</button>
+                    </div>
                 </form>
+                @else
+                <div class="drinks-container">
+                    <div class="drink-cashier-container" data-drink-id="-1">
+                        <a href="{{ route('drinks.create') }}" class="cashier-drink-logo bg-gray-100 overflow-hidden shadow-sm sm:rounded-lg">
+                            <img class="drink-cashier-img" src="{{ asset('images/BeerLogo.webp') }}" alt="Logo">
+                        </a>
+                        <div class="drink-info">
+                            <a href="#">Create your first drink!</a>
+                            <h2 id="market-price--1">$...</h2>
+                        </div>
+                        <div class="quantity-control">
+                            <a href="{{ route('drinks.create') }}" onclick="">Create Drink</a>
+                        </div>
+                    </div>
+                </div>
+                @endif
             @else
                 <div class="text-center text-gray-500">
                     Market is closed. Please open a new market session in your <a href="{{ route('dashboard') }}" class="drinks-dashboard-link">dashboard</a> before selling your drinks.

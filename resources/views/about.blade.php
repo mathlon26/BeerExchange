@@ -23,10 +23,9 @@
     </head>
     <body class="font-sans antialiased text-black">
         <div class="bg-gray-50">
-            <img id="background" class="absolute -left-20 top-0 max-w-[877px]" src="{{asset("/images/BeerOverlay.webp")}}" />
+            <img id="background" class="absolute -left-20 top-0 max-w-[700px]" src="{{asset("/images/BeerOverlay.webp")}}" />
             <div class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
                 <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
-    
                     <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
     
                         <x-application-logo class="w-20 h-20 fill-current" />
@@ -54,12 +53,12 @@
                         @endif
                     </header>
     
-                    <main class="mt-6  overflow-hidden">
+                    <main class="mt-6">
                         <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
-                            <a href="{{ route('entercode') }}" id="docs-card"
+                            <a href="{{ Auth::user() ? route('dashboard') : route('register') }}" id="getstarted-card"
                                 class="flex flex-col items-start gap-6 overflow-hidden rounded-lg p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] md:row-span-3 lg:p-10 lg:pb-10">
                                 <div id="screenshot-container" class="relative flex w-full flex-1 items-stretch">
-                                    <img src="{{asset("/images/WelcomeImage_3.jpg")}}" alt="event example picture"
+                                    <img src="{{asset("/images/WelcomeImage_2.jpg")}}" alt="event example picture"
                                         class="hidden aspect-video h-full w-full flex-1 rounded-[10px] object-top object-cover drop-shadow-[0px_4px_34px_rgba(0,0,0,0.25)] dark:block" />
                                 </div>
     
@@ -67,11 +66,12 @@
                                     <div id="docs-card-content" class="flex items-start gap-6 lg:flex-col">
     
     
-                                        <div class="pt-3 sm:pt-5 lg:pt-0">
-                                            <h2 class="amaranth-regular text-xl font-semibold text-black">Enter Code Here</h2>
-    
+                                        <div class="pt-3 sm:pt-5">
+                                            <h2 class="amaranth-regular text-xl font-semibold text-black">Get Started</h2>
+            
                                             <p class="mt-4 text-sm/relaxed">
-                                                Follow an active event by entering the event code here or ask to scan the qr-code from your host!
+                                                Host your own BeerExchange now! This will lead you to your very own dashboard where
+                                                you can customize drinks, set prices and manipulate the market! ;)
                                             </p>
                                         </div>
                                     </div>
@@ -85,43 +85,29 @@
                                 </div>
                             </a>
     
-                            <a href="{{ Auth::user() ? route('dashboard') : route('register') }}" id="getstarted-card"
-                                class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10">
-                                <div class="pt-3 sm:pt-5">
-                                    <h2 class="amaranth-regular text-xl font-semibold text-black">Get Started</h2>
+                        
     
-                                    <p class="mt-4 text-sm/relaxed">
-                                        Host your own BeerExchange now! This will lead you to your very own dashboard where
-                                        you can customize drinks, set prices and manipulate the market! ;)
-                                    </p>
-                                </div>
-    
-                                <svg class="size-6 shrink-0 self-center stroke-[#FF2D20]"
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
-                                </svg>
-                            </a>
-    
-                            <a href="{{ route('about') }}" id="aboutus-card"
+                            <div id="aboutus-card"
                                 class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10">
                                 <div class="pt-3 sm:pt-5">
                                     <h2 class="amaranth-regular text-xl font-semibold text-black">About BeerExchange</h2>
     
                                     <p class="mt-4 text-sm/relaxed">
-                                        Click here to learn more about the origin, idea, and implementation of this
-                                        application.
+                                        BeerExchange.com is inspired by the vibrant and unique event known as Beursfuif, held annually in Bilzen, Belgium, by the local youth center. This event revolutionizes the traditional bar experience by dynamically pricing drinks based on customer purchasing behavior over time. After attending Beursfuif for the first time during my high school years, I was captivated by its innovative and engaging concept.
                                     </p>
+                                    <p class="mt-4 text-sm/relaxed">
+                                        Determined to share this joy with others, I set out to modernize the experience by developing a contemporary website. Now, BeerExchange.com offers this exciting concept to bar owners worldwide, free of charge. Our platform allows any pub or bar to implement dynamic drink pricing, creating a thrilling and interactive atmosphere for patrons.
+                                    </p>
+                                    <p class="mt-4 text-sm/relaxed">
+                                        Whether you're a bar owner looking to elevate your establishment's entertainment value or a customer seeking a novel nightlife experience, BeerExchange.com is here to bring the excitement of Beursfuif to you.
+                                    </p>
+                                    <p class="mt-4 text-sm/relaxed">
+                                        For questions or issues with the website, feel free to contact me at  <a href="mailto:mathijs.follon@gmail.com?subject=Question%20regarding%20BeerExchange.com" class="underlined">mathijs.follon@gmail.com</a>.
+                                    </p>
+                                    <p class="mt-4 text-sm/relaxed">Join us and transform your bar experience with BeerExchange.com!</p>
                                 </div>
     
-                                <svg class="size-6 shrink-0 self-center stroke-[#FF2D20]"
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
-                                </svg>
-                            </a>
+                            </div>
     
                             <div id="helpus-card"
                                 class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10">

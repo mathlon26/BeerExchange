@@ -1,4 +1,5 @@
 <x-charts>
+    
     <div class="bg-slate min-h-screen flex flex-col sm:justify-center items-center">
         
         <div class="px-2 w-full overflow-hidden sm:rounded-lg">
@@ -10,6 +11,9 @@
                     </a>
                 </div>
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    @if (count($drinks) > 0)
+                        
+
                     <!-- Graph Section -->
                     <div>
                         <h1 class="text-3xl text-center font-bold mb-6">{{$market->name}}</h1>
@@ -34,13 +38,28 @@
                             </div>
                         </div>
                     </div>
+                    @else
+                    <div class="py-12">
+                        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                            <div class="p-6 bg-white border-b border-gray-200">
+                                <h2 class="text-center text-lg font-bold text-gray-800 leading-tight">Your host has not created any drinks yet! <a href="{{ route('home') }}" class="drinks-dashboard-link">go back</a>.</h2>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
         
     </div>
-
     <script>
+
+        if (@json($selected_drink_id)) {
+            const drink_id = @json($selected_drink_id);
+            const selectElement = document.getElementById('drinkSelect');
+            selectElement.value = drink_id;
+        }
+
         async function fetchPriceHistory(drinkId) {
             try {
                 const response = await fetch(`/api/drink/${drinkId}/price-history`);

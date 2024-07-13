@@ -11,19 +11,22 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/session/id/{market_session_id}', [GuestController::class, 'getMarketSession']);
-Route::get('/session/id/{market_session_id}/all', [GuestController::class, 'getAllMarketSession']);
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/session/id/{market_session_id}/all', [GuestController::class, 'getAllMarketSession'])->name('sessionAll');
+Route::get('/session/id/{market_session_id}/{drink_id}', [GuestController::class, 'getMarketSession'])->name('drinkChart');
+Route::get('/session/id/{market_session_id}/{drink_id}/all', function ($market_session_id, $drink_id) {
+    $newRoute = route('sessionAll', ['market_session_id' => $market_session_id]);
+    return redirect($newRoute);
+});
 
-Route::get('/cashier', function () {
-    return view('cashier');
-})->middleware(['auth', 'verified'])->name('cashier');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/cashier', [DashboardController::class, 'cashier'])->middleware(['auth', 'verified'])->name('cashier');
 
 Route::get('/qr-code', [GuestController::class, 'showQrCode'])->middleware(['auth', 'verified'])->name('qr-code');
 
 
-Route::get('/about', [GuestController::class, 'showQrCode'])->name('about');
+Route::get('/about', [GuestController::class, 'about'])->name('about');
 
 Route::get('/enter-code', [GuestController::class, 'enterCode'])->name('entercode');
 
@@ -41,10 +44,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/cashier/checkout', [DashboardController::class, 'checkout'])->name('checkout');
     Route::post('/market/create', [DashboardController::class, 'createMarket'])->name('market.create');
 
+    Route::delete('/market/delete', [DashboardController::class, 'deleteMarket'])->name('market.delete');
+
     
     Route::get('/drinks', [DrinkController::class, 'index'])->name('drinks');
     Route::get('/drinks/create', [DrinkController::class, 'create'])->name('drinks.create');
-    Route::post('/drinks', [DrinkController::class, 'store'])->name('drinks.store');
+    Route::post('/drinks/store', [DrinkController::class, 'store'])->name('drinks.store');
+    Route::delete('/drinks/delete', [DrinkController::class, 'delete'])->name('drinks.delete');
     Route::get('/drinks/{drink}/edit', [DrinkController::class, 'edit'])->name('drinks.edit');
     Route::put('/drinks/{drink}', [DrinkController::class, 'update'])->name('drinks.update');
 

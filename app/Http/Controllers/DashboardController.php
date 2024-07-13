@@ -50,6 +50,13 @@ class DashboardController extends Controller
         return redirect()->route('cashier')->with('success', 'Checkout successful!');
     }
 
+    public function cashier(Request $request)
+    {
+        $user = Auth::user();
+        $drinks = $user->marketOpen() ? $user->markets()->first()->drinks : null;
+        return view('cashier', ['drinks' => $drinks]);
+    }
+
 
     public function createMarket(Request $request)
     {
@@ -61,11 +68,48 @@ class DashboardController extends Controller
             'profit' => 'required|numeric',
             'user_id' => 'required|numeric'
         ]);
-        $validated['market_session_id'] = uniqid("BE-S", true);
+        $validated['market_session_id'] = ' ';
         $market = Market::create($validated);
+        $market->market_session_id = 'BE-' . strval(100000 + $market->id);
         $market->save();
 
         return redirect()->route('dashboard')->with('success', 'Market created successfully!');
+    }
+
+    public function deleteMarket(Request $request)
+    {
+        $request->validate([
+           'market_id' =>'required|numeric'
+        ]);
+
+        $market = Market::findOrFail($request->market_id);
+        $market->delete();
+
+        return redirect()->route('dashboard')->with('success', 'Market deleted successfully!');
+    }
+
+    public function index(Request $request)
+    {
+        $data = [
+            'user' => null,
+            'market' => null,
+            'drinks' => [],
+        ];
+
+        if (Auth::user()->marketOpen())
+        {
+            $user = Auth::user();
+            $market = $user->markets()->first();
+            $drinks = $market->drinks->sortByDesc('amount_sold');
+
+            $data['user'] = $user;
+            $data['market'] = $market;
+            $data['drinks'] = $drinks;
+        }
+
+        
+
+        return view('dashboard', $data);
     }
 }
 

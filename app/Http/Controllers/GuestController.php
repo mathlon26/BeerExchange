@@ -11,7 +11,7 @@ use Endroid\QrCode\Writer\PngWriter;
 
 class GuestController extends Controller
 {
-    public function getMarketSession($market_session_id)
+    public function getMarketSession($market_session_id, $drink_id = null)
     {
         $market = Market::where('market_session_id', $market_session_id)->first();
 
@@ -22,7 +22,7 @@ class GuestController extends Controller
 
         $drinks = $market->drinks;
 
-        return view('chartsview', ['market' => $market, 'drinks' => $drinks]);
+        return view('chartsview', ['market' => $market, 'drinks' => $drinks, 'selected_drink_id' => $drink_id ? $drink_id : false]);
     }
 
     public function getAllMarketSession($market_session_id)
@@ -35,8 +35,7 @@ class GuestController extends Controller
         }
 
         $drinks = $market->drinks;
-
-        return view('allchartsview', ['market' => $market, 'drinks' => $drinks]);
+        return view('allchartsview', ['drinks' => $drinks, 'market' => $market]);
     }
 
     public function showQrCode()
@@ -81,5 +80,10 @@ class GuestController extends Controller
         } else {
             return redirect()->route('entercode')->with('error', 'Invalid code!');
         }
+    }
+
+
+    public function about(Request $request) {
+        return view('about');
     }
 }

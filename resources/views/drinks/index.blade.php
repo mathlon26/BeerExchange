@@ -41,17 +41,29 @@
                                         <td class="py-2 px-4">{{ $drink->name }}</td>
                                         <td class="py-2 px-4">${{ $drink->market_price }}</td>
                                         <td class="py-2 px-4">${{ $drink->cost_price }}</td>
-                                        <td class="py-2 px-4 actions">
-                                            <a href="{{ route('drinks.edit', $drink) }}" class="edit-btn">Edit</a>
+                                        <td class="py-2 px-4 gap-4 flex flex-col">
+                                            <div class="flex flex-row">
+                                                <a href="{{ route('drinks.edit', $drink) }}" class="action-link edit-btn">Edit</a>
+                                                <form action="{{ route('drinks.delete', $drink) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+
+                                                    <input type="hidden" name="drink_id" value="{{ $drink->id }}">
+                                                    <button type="submit" class="action-link dump-btn">delete</a>
+                                                </form>
+                                            </div>
+                                            
                                             @if ($drink->allow_manualcrash)
-                                            <a href="{{ route('drinks.edit', $drink) }}" class="pump-btn">Pump</a>
-                                            <a href="{{ route('drinks.edit', $drink) }}" class="dump-btn">Dump</a>
+                                            <div>
+                                                <a href="{{ route('drinks.edit', $drink) }}" class="action-link pump-btn">Pump</a>
+                                                <a href="{{ route('drinks.edit', $drink) }}" class="action-link dump-btn">Dump</a>
+                                            </div>
                                             @else
                                             Edit for more actions
                                             @endif
                                         </td>
                                         <td class="py-2 px-4">
-                                            <button class="view-chart-btn">View Chart</button>
+                                            <a href={{ route('drinkChart', [$market->market_session_id, $drink->id]) }} class="view-chart-btn">View Chart</a>
                                         </td>
                                     </tr>
                                 @endforeach

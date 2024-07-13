@@ -42,11 +42,6 @@
     </div>
     
     @else
-    @php
-        $user = Auth::user();
-        $market = $user->markets()->first();
-        $drinks = $market->drinks;
-    @endphp
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             @if ($drinks->count() > 0)
@@ -57,7 +52,17 @@
                         <h2 class="text-center font-semibold text-xl text-gray-800 leading-tight">
                             Event Dashboard for {{ $market->name }}
                         </h2>
-                        <button class="btn-custom-blue px-4 py-2 text-white rounded ">End Event</button>
+                        <div class="flex justify-left gap-4">
+                            <button onclick="location.reload()" class="btn-custom-blue px-4 py-2 text-white rounded ">Refresh Dashboard</button>
+                            <form action="{{ route('market.delete', $market) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+
+                                <input type="hidden" name="market_id" value="{{ $market->id }}">
+                                <button type="submit" class="btn-custom-blue px-4 py-2 text-white rounded ">End Event</button>
+                            </form>
+                        </div>
+                        
                     </div>
 
                     
@@ -95,7 +100,7 @@
                     <div>
                         <div class="summary-box p-4 rounded-lg shadow mb-6">
                             <!-- Select box for drinks -->
-                            <div class="flex gap-4&² items-center text-left mb-4">
+                            <div class="flex gap-4 items-center text-left mb-4">
                                 <select id="drinkSelect" class="py-2 border border-gray-300 rounded-lg">
                                     @foreach ($drinks as $drink)
                                         <option value="{{ $drink->id }}" data-drink-id="{{ $drink->id }}">{{ $drink->name }}</option>
@@ -152,10 +157,10 @@
                     
     
                     <!-- Buttons for Each Drink (assuming dynamic data) -->
-                    <div>
-                        @php
-                            $i = 0;
-                        @endphp
+                    @php
+                        $i = 0;
+                    @endphp
+                    <div class="flex flex-col gap-6">
                         @foreach ($drinks as $drink)
                         @php
                             $i += 1;
@@ -164,7 +169,7 @@
                             
                             <div class="flex items-center">
                                 <span class="m-2 text-lg font-bold">#{{ $i }}</span>
-                                <a href="#" class="cashier-drink-logo bg-gray-100 overflow-hidden shadow-sm sm:rounded-lg">
+                                <a href="#" class="px-4 cashier-drink-logo bg-gray-100 overflow-hidden sm:rounded-lg">
                                     <img class="drink-cashier-img" src="{{ asset($drink->logo) }}" alt="Logo">
                                 </a>
                                 <span class="m-2 text-lg font-bold">{{ $drink->name }}</span>
@@ -172,9 +177,9 @@
                             <span class="m-2 text-lg font-bold">{{ $drink->amount_sold }} drinks sold!</span>
 
                             <div>
-                                <button class="px-4 py-2 btn-custom-blue text-white rounded">Edit</button>
-                                <button class="px-4 py-2 bg-custom-green text-white rounded hover:bg-custom-green:hover">Pump</button>
-                                <button class="px-4 py-2 bg-custom-red text-white rounded hover:bg-custom-red:hover">Dump</button>
+                                <a href="{{ route('drinks') }}" class="px-4 py-2 btn-custom-blue text-white rounded">Edit</a>
+                                <a class="px-4 py-2 bg-custom-green text-white rounded hover:bg-custom-green:hover">Pump</a>
+                                <a class="px-4 py-2 bg-custom-red text-white rounded hover:bg-custom-red:hover">Dump</a>
                             </div>
                             
                         </div>
@@ -197,7 +202,13 @@
                                     <h2 class="text-center font-semibold text-xl text-gray-800 leading-tight">
                                         Event Dashboard for {{ $market->name }}
                                     </h2>
-                                    <button class="btn-custom-blue px-4 py-2 text-white rounded ">End Event</button>
+                                    <form action="{{ route('market.delete', $market) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+        
+                                        <input type="hidden" name="market_id" value="{{ $market->id }}">
+                                        <button type="submit" class="btn-custom-blue px-4 py-2 text-white rounded ">End Event</button>
+                                    </form>
                                 </div>
                                 <h2 class="text-center text-lg font-bold text-gray-800 leading-tight">First create drinks to see their performance in the <a href="{{ route('drinks') }}" class="drinks-dashboard-link">drinks</a> tab.</h2>
                             </div>
